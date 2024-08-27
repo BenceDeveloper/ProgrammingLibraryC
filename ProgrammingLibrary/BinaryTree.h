@@ -51,4 +51,23 @@ class BinaryTree
 				Inorder(node->Right);
 			}
 		}
+		void Preorder(Node* node) 
+		{
+			if (node != nullptr) 
+			{
+				cout << node->data << " ";
+				Preorder(node->Left);
+				Preorder(node->Right);
+			}
+		}
+		
+		void Postorder(Node* node) 
+		{
+			if (node != nullptr) 
+			{
+				Postorder(node->Left);
+				Postorder(node->Right);
+				cout << node->data << " ";
+			}
+		}
 };
