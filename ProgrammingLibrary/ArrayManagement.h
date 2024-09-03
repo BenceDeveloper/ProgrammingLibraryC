@@ -26,6 +26,16 @@ public:
 	void Ascending();
 
 	void Descending();
+
+	int LinearSearch(T Target);
+
+	void BubbleSorting(char condition);
+
+	void QuickSorting();
+
+	void ShellSorting(char condition);
+
+	void InsertionSorting(char condition);
 };
 template <typename T>
 ProgrammingItems<T>::ProgrammingItems(T* Value, int n)
@@ -133,6 +143,73 @@ void ProgrammingItems<T>::Ascending()
 		}
 		if (!swapped)
 			break;
+	}
+}
+
+template <typename T>
+int ProgrammingItems<T>::LinearSearch(T Target)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if(Value[i] == Target)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+template <typename T>
+void ProgrammingItems<T>::InsertionSorting(char condition)
+{
+	for (int i = 1; i < n; i++)
+	{
+		int key = Value[i];
+		int j = i - 1;
+		while (j >= 0 && Condition(Value[j], key, condition))
+		{
+			Value[j + 1] = Value[j];
+			j = j - 1;
+		}
+		Value[j + 1] = key;
+	}
+}
+
+template <typename T>
+void ProgrammingItems<T>::BubbleSorting(char condition)
+{
+	for (int i = 0; i < n - 1; i++) 
+	{
+		for (int j = 0; j < n - i - 1; j++) 
+		{
+			if (Condition(Value[j], Value[j+1], condition))
+			{
+				int temp = Value[j];
+				Value[j] = Value[j + 1];
+				Value[j + 1] = temp;
+			}
+		}
+	}
+}
+
+template <typename T>
+void ProgrammingItems<T>::ShellSorting(char condition)
+{
+	for (int gap = n / 2; gap > 0; gap /= 2) 
+	{
+		// A lépték alapján kezdjük el a rendezést
+		for (int i = gap; i < n; i++) 
+		{
+			int temp = Value[i];
+			int j;
+			// Mozgassuk a gap értékû elemeket, amíg azok nagyobbak a temp-nél
+			for (j = i; j >= gap && Condition(Value[j - gap], temp, condition); j -= gap)
+			{
+				Value[j] = Value[j - gap];
+			}
+			// Helyezzük be a temp-et a megfelelõ helyre
+			Value[j] = temp;
+		}
 	}
 }
 #endif
