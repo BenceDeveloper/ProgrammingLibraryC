@@ -11,6 +11,8 @@ class ProgrammingItems
 private:
 	T* Value;
 	int n;
+
+	bool Condition(T value, T Item, char condition);
 public:
 	ProgrammingItems(T* Value, int n);
 	~ProgrammingItems();
@@ -20,8 +22,6 @@ public:
 	T Sum();
 
 	int Count(T value, char condition);
-
-	bool Condition(T value, T Item, char condition);
 
 	void Ascending();
 
@@ -44,12 +44,14 @@ ProgrammingItems<T>::ProgrammingItems(T* Value, int n)
 	this->n = n;
 	cout << "Szia ez egy Constructor!!!" << endl;
 }
+
 template <typename T>
 ProgrammingItems<T>::~ProgrammingItems()
 {
 	cout << "Szia ez egy Deconstructor!!!" << endl;
 	delete[] Value;
 }
+
 template <typename T>
 string ProgrammingItems<T>::Print()
 {
@@ -71,6 +73,7 @@ T ProgrammingItems<T>::Sum()
 	}
 	return sum;
 }
+
 template <typename T>
 int ProgrammingItems<T>::Count(T value, char condition)
 {
@@ -86,6 +89,7 @@ int ProgrammingItems<T>::Count(T value, char condition)
 	}
 	return Counter;
 }
+
 template<typename T>
 bool ProgrammingItems<T>::Condition(T value, T item, char condition)
 {
@@ -151,12 +155,12 @@ int ProgrammingItems<T>::LinearSearch(T Target)
 {
 	for (int i = 0; i < n; i++)
 	{
-		if(Value[i] == Target)
+		if(Value[i] == Target) // visszaadjuk a megtalált elem indexét
 		{
 			return i;
 		}
 	}
-	return -1;
+	return -1; // ha nem találjuk meg az elemet, visszaadunk egy -1-et
 }
 
 template <typename T>
@@ -166,12 +170,13 @@ void ProgrammingItems<T>::InsertionSorting(char condition)
 	{
 		int key = Value[i];
 		int j = i - 1;
+		// A rendezett részben megkeressük a helyet a key számára
 		while (j >= 0 && Condition(Value[j], key, condition))
 		{
 			Value[j + 1] = Value[j];
 			j = j - 1;
 		}
-		Value[j + 1] = key;
+		Value[j + 1] = key; // beszúrjuk a key-t a megfelelõ helyre
 	}
 }
 
@@ -180,8 +185,10 @@ void ProgrammingItems<T>::BubbleSorting(char condition)
 {
 	for (int i = 0; i < n - 1; i++) 
 	{
+		// Az utolsó i elem már a helyén van, így azt nem kell újra ellenõrizni
 		for (int j = 0; j < n - i - 1; j++) 
 		{
+			// Ha a jelenlegi elem nagyobb, mint a következõ, akkor cseréljük meg õket
 			if (Condition(Value[j], Value[j+1], condition))
 			{
 				int temp = Value[j];
