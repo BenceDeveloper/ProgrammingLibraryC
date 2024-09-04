@@ -13,7 +13,6 @@ class Node
 		data = value;
 		Left = Right = nullptr;
 	}
-
 };
 
 class BinaryTree
