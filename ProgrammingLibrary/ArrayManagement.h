@@ -168,7 +168,7 @@ void ProgrammingItems<T>::InsertionSorting(char condition)
 {
 	for (int i = 1; i < n; i++)
 	{
-		int key = Value[i];
+		T key = Value[i];
 		int j = i - 1;
 		// A rendezett részben megkeressük a helyet a key számára
 		while (j >= 0 && Condition(Value[j], key, condition))
@@ -191,7 +191,7 @@ void ProgrammingItems<T>::BubbleSorting(char condition)
 			// Ha a jelenlegi elem nagyobb, mint a következõ, akkor cseréljük meg õket
 			if (Condition(Value[j], Value[j+1], condition))
 			{
-				int temp = Value[j];
+				T temp = Value[j];
 				Value[j] = Value[j + 1];
 				Value[j + 1] = temp;
 			}
@@ -207,7 +207,7 @@ void ProgrammingItems<T>::ShellSorting(char condition)
 		// A lépték alapján kezdjük el a rendezést
 		for (int i = gap; i < n; i++) 
 		{
-			int temp = Value[i];
+			T temp = Value[i];
 			int j;
 			// Mozgassuk a gap értékû elemeket, amíg azok nagyobbak a temp-nél
 			for (j = i; j >= gap && Condition(Value[j - gap], temp, condition); j -= gap)

@@ -9,8 +9,8 @@ class FileHandler
 {
 	public:
 		string FilePath;
-		int n;
-		char* DataArray = new char[n];
+		const int MAX_SIZE = 200;
+		char* DataArray = new char[MAX_SIZE];
 		FileHandler(string FilePath)
 		{
 			this->FilePath = FilePath;
@@ -30,7 +30,7 @@ void FileHandler::FileReader()
 	if (inFile.is_open())
 	{
 		int i = 0;
-		while (inFile.get(ch))
+		while (inFile.get(ch) && i != MAX_SIZE)
 		{
 			DataArray[i] = ch;
 			i++;
@@ -49,9 +49,9 @@ void FileHandler::FileWritter()
 
 void FileHandler::Print()
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		cout << DataArray[i] << endl;
+		cout << DataArray[i];
 	}
 }
 #endif
