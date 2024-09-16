@@ -9,12 +9,21 @@ class FileHandler
 {
 	public:
 		string FilePath;
-		const int MAX_SIZE = 200;
-		char* DataArray = new char[MAX_SIZE];
+		int MAX_SIZE = 200;
+		char* DataArray = NULL;
 		FileHandler(string FilePath)
 		{
 			this->FilePath = FilePath;
+			DataArray = new char[MAX_SIZE];
 		};
+
+		FileHandler(string FilePath,int MAX_SIZE)
+		{
+			this->FilePath = FilePath;
+			this->MAX_SIZE = MAX_SIZE;
+			DataArray = new char[MAX_SIZE];
+		};
+
 		~FileHandler()
 		{
 			delete[] DataArray;
