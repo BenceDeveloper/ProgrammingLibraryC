@@ -1,2 +1,0 @@
-# ProgrammingLibrary
-Only-header library
